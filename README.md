@@ -1,2 +1,5 @@
-# NET8-MicroservicesHashiCorpVault
-Example showing how to use HashiCorp Vault in a .NET 8 microservices project
+# NET8-Microservices
+
+## Prerequisites
+- HashiCorp Vault (docker version): https://github.com/AngeloDotNet/Docker.Application/tree/main/Vault
+- RabbitMQ (docker version): https://github.com/AngeloDotNet/Docker.Application/tree/main/Rabbit-MQ
