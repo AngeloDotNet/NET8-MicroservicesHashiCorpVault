@@ -30,11 +30,6 @@ public static class DependencyInjection
         return services;
     }
 
-    private static string NameOf(this object o)
-    {
-        return o.GetType().Name;
-    }
-
     public static IServiceCollection AddConsumerRabbitMQ<Consumer>(this IServiceCollection services, RabbitMQSettings settings)
     {
         services.AddMassTransit(x =>
