@@ -3,8 +3,6 @@ using Microservices.Orders.DataAccessLayer;
 using Microservices.Shared.Services;
 using Microservices.Shared.Settings;
 using Microsoft.EntityFrameworkCore;
-using Vault;
-using Vault.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,17 +13,11 @@ var vaultSettings = builder.Services.ConfigureAndGet<VaultSettings>(builder.Conf
 var rabbitMQSettings = builder.Services.ConfigureAndGet<RabbitMQSettings>(builder.Configuration, nameof(RabbitMQSettings));
 
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton((serviceProvider) =>
-{
-    var config = new VaultConfiguration(vaultSettings!.Address);
-    var vaultClient = new VaultClient(config);
 
-    vaultClient.SetToken(vaultSettings!.Token);
+// Command to be used only the first time in order to generate secrets in the Vault
+await DependencyInjection.GenerateVaultSecretsAsync(vaultSettings!);
 
-    return vaultClient;
-});
-
-var connectionString = DependencyInjection.GetConnectionDatabase(vaultSettings!);
+var connectionString = await DependencyInjection.ReadVaultSecretAsync(vaultSettings!, "sqlserver", "connection", "secret");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
