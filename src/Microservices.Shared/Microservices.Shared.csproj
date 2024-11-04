@@ -10,7 +10,6 @@
     <PackageReference Include="MassTransit" Version="8.3.0" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
-    <PackageReference Include="HashiCorp.Vault" Version="0.3.0" />
     <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
     <PackageReference Include="VaultSharp" Version="1.17.5.1" />
   </ItemGroup>
